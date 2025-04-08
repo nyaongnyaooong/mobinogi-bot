@@ -1,0 +1,12 @@
+docker/db
+
+.gradle
+.idea
+.vscode
+.DS_Store
+.env
+.env.local
+
+data
+
+build

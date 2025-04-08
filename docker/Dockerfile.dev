@@ -1,0 +1,24 @@
+FROM gradle:jdk17
+
+WORKDIR /app
+
+# Install dumb-init for proper signal handling
+RUN apt-get update && apt-get install -y dumb-init && rm -rf /var/lib/apt/lists/*
+
+# Create the gradle user's home directory and set permissions
+RUN mkdir -p /home/gradle && chown -R gradle:gradle /home/gradle
+
+# Create empty build files if they don't exist
+RUN touch build.gradle.kts settings.gradle.kts
+
+# Download dependencies as a separate layer
+RUN gradle dependencies --no-daemon
+
+EXPOSE 8080
+EXPOSE 5005
+
+# Use dumb-init as entrypoint to handle signals properly
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+
+# Run Gradle in continuous build mode
+CMD ["gradle", "bootRun", "--continuous", "--stacktrace", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'"] 

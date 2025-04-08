@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  mobinogi-bot:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: mobinogi-bot
+    restart: always
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:sqlite:/app/data/mobinogi_bot.db
+    volumes:
+      - ./db:/app/data
+    ports:
+      - "8080:8080" 

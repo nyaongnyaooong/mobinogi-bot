@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:mobinogi_bot.db
+    driver-class-name: org.sqlite.JDBC
+    username: sa
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+discord:
+  token: your_discord_bot_token
+  channel-id: your_channel_id
+
+scheduler:
+  enabled: true
+  cron: "0 0/30 * * * ?"  # 30분마다 실행 

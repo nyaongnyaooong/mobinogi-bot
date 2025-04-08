@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mobinogi-bot:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.dev
+    container_name: mobinogi-bot-dev
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATASOURCE_URL=jdbc:sqlite:/app/data/mobinogi_bot.db
+    volumes:
+      - ../:/app
+      - gradle-cache:/home/gradle/.gradle
+      - ./db:/app/data
+    ports:
+      - "8080:8080"
+      - "5005:5005"  # Debug port
+    # Keep container running even after errors
+    restart: unless-stopped
+
+volumes:
+  gradle-cache:
+    name: gradle-cache 
