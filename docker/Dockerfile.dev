@@ -1,0 +1,14 @@
+FROM gradle:7.6.1-jdk17
+
+WORKDIR /app
+
+ENV SPRING_DEVTOOLS_REMOTE_SECRET=mysecret
+ENV SPRING_DEVTOOLS_RESTART_ENABLED=true
+
+# Gradle 캐시를 위한 볼륨 설정
+VOLUME /home/gradle/.gradle
+
+# 개발 서버 실행
+CMD ["gradle", "bootRun", "--continuous", "-t"]
+# CMD ["gradle", "bootRun", "-x", "test", "--continuous"]
+# CMD ["gradle", "bootRun", "--no-daemon"] 

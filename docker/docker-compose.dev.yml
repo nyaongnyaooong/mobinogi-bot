@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.dev
+    ports:
+      - "2075:8080"
+    volumes:
+      - ../:/app
+      - gradle-cache:/home/gradle/.gradle
+      - ../build:/app/build  # 상대 경로로 수정
+      - ../src:/app/src      # 소스 코드 명시적 마운트 추가
+      - ./db:/app/docker/db  # SQLite DB 파일을 위한 볼륨 추가
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DEVTOOLS_REMOTE_SECRET=mysecret  # devtools 원격 시크릿
+      - SPRING_DEVTOOLS_RESTART_ENABLED=true    # 자동 재시작 활성화
+    networks:
+      - spring-bot-network
+
+volumes:
+  gradle-cache:
+
+networks:
+  spring-bot-network:
+    driver: bridge 

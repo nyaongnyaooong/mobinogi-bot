@@ -1,0 +1,18 @@
+services:
+  app:
+    container_name: scheduler-app
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./db:/app/docker/db  # SQLite DB 파일을 위한 볼륨 추가
+    ports:
+      - "2075:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring-bot-network
+
+networks:
+  spring-bot-network:
+    driver: bridge 

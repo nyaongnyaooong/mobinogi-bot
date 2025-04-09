@@ -15,9 +15,32 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	implementation 'org.xerial:sqlite-jdbc:3.49.1.0' // sqlite jdbc
+	implementation 'org.hibernate.orm:hibernate-community-dialects' // diarect 
+
+    implementation 'com.h2database:h2'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    
+}
+
+bootRun {
+    sourceResources sourceSets.main
 }
 
 tasks.named('test') {
