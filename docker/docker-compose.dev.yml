@@ -8,8 +8,8 @@ services:
     volumes:
       - ../:/app
       - gradle-cache:/home/gradle/.gradle
-      - ../build:/app/build  # 상대 경로로 수정
-      - ../src:/app/src      # 소스 코드 명시적 마운트 추가
+      # - ../build:/app/build  # 상대 경로로 수정
+      # - ../src:/app/src      # 소스 코드 명시적 마운트 추가
       - ./db:/app/docker/db  # SQLite DB 파일을 위한 볼륨 추가
     environment:
       - SPRING_PROFILES_ACTIVE=dev

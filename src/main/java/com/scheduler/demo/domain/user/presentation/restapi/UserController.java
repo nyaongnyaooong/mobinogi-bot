@@ -23,12 +23,10 @@ public class UserController {
     public ResponseEntity<UserDto.Response> getUser(@PathVariable String email) {
         System.out.println("emailemailemailemailemailemailemailemailemailemailemailemailemailemail: " + email);
         System.out.println("--------------------------------");
-        System.out.println("-----------------------------123---");
-        System.out.println("-----------------------------34---");
-        System.out.println("----------------------------5432----");
-        System.out.println("-------------------------ㄱ23-------");
-        System.out.println("----------------------34ㅎ3----------");
-        System.out.println("----------------------ㄱ3----------");
+        System.out.println("-----------------------345---------");
+        System.out.println("-----------------------345---------");
+        System.out.println("-----------------------345---------");
+        System.out.println("-----------------------345---------");
         System.out.println("-----------------------345---------");
 
         User user = userService.getUserByEmail(email);
